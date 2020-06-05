@@ -13,6 +13,11 @@ public class caeserCipher
         for(int i=0;i<encrypted.length();i++)
         {
             char currentChar=encrypted.charAt(i);
+            if('a'<= currentChar && currentChar <= 'z')
+            {
+                alphabet=alphabet.toLowerCase();
+                shifted=shifted.toLowerCase();
+            }
             int idx=alphabet.indexOf(currentChar);
 
             if(idx!=-1)
@@ -34,6 +39,11 @@ public class caeserCipher
         for(int i=0;i<decrypted.length();i++)
         {
             char currentChar=decrypted.charAt(i);
+            if('a'<= currentChar && currentChar <= 'z')
+            {
+                alphabet=alphabet.toLowerCase();
+                shifted=shifted.toLowerCase();
+            }
             int idx=alphabet.indexOf(currentChar);
 
             if(idx!=-1)
