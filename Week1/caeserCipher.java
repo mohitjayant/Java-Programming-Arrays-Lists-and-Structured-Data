@@ -18,6 +18,11 @@ public class caeserCipher
                 alphabet=alphabet.toLowerCase();
                 shifted=shifted.toLowerCase();
             }
+            if('A'<= currentChar && currentChar <= 'Z')
+            {
+                alphabet=alphabet.toUpperCase();
+                shifted=shifted.toUpperCase();
+            }
             int idx=alphabet.indexOf(currentChar);
 
             if(idx!=-1)
@@ -44,6 +49,11 @@ public class caeserCipher
                 alphabet=alphabet.toLowerCase();
                 shifted=shifted.toLowerCase();
             }
+            if('A'<= currentChar && currentChar <= 'Z')
+            {
+                alphabet=alphabet.toUpperCase();
+                shifted=shifted.toUpperCase();
+            }
             int idx=alphabet.indexOf(currentChar);
 
             if(idx!=-1)
@@ -56,6 +66,59 @@ public class caeserCipher
         return decrypted.toString();
     }
 
+    public String encryptTwoKeys(String message,int key1,int key2)
+    {
+        StringBuilder twoKeys=new StringBuilder(message);
+        String  alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String firstShifted=alphabet.substring(key1)+alphabet.substring(0,key1);
+        String secondShifted=alphabet.substring(key2)+alphabet.substring(0,key2);
+        for(int i=0;i<twoKeys.length();i++)
+        {
+            char currentChar=twoKeys.charAt(i);
+            if(i%2==0)
+            {
+                if('a'<= currentChar && currentChar <= 'z')
+                {
+                    alphabet=alphabet.toLowerCase();
+                    firstShifted=firstShifted.toLowerCase();
+                }
+                if('A'<= currentChar && currentChar <= 'Z')
+                {
+                    alphabet=alphabet.toUpperCase();
+                    firstShifted=firstShifted.toUpperCase();
+                }
+                int idx=alphabet.indexOf(currentChar);
+
+                if(idx!=-1)
+                {
+                    char newChar=firstShifted.charAt(idx);
+                    twoKeys.setCharAt(i, newChar);
+                }
+            }
+            else
+            {
+                if('a'<= currentChar && currentChar <= 'z')
+                {
+                    alphabet=alphabet.toLowerCase();
+                    secondShifted=secondShifted.toLowerCase();
+                }
+                if('A'<= currentChar && currentChar <= 'Z')
+                {
+                    alphabet=alphabet.toUpperCase();
+                    secondShifted=secondShifted.toUpperCase();
+                }
+                int idx=alphabet.indexOf(currentChar);
+
+                if(idx!=-1)
+                {
+                    char newChar=secondShifted.charAt(idx);
+                    twoKeys.setCharAt(i, newChar);
+                }
+            }
+        }
+        return twoKeys.toString();
+    }
+
     public void testCaeser() {
         int key=17;
         FileResource fr=new FileResource();
@@ -64,6 +127,8 @@ public class caeserCipher
         System.out.println("Encrypted: "+encrypted);
         String decrypted=decrypt(encrypted,26-key);
         System.out.println("Decrypted: "+decrypted);
+        String twoKey=encryptTwoKeys(message,23,17);
+        System.out.println("Encrypted using two keys: "+twoKey);
     }
 
     public static void main(String[] args) {
