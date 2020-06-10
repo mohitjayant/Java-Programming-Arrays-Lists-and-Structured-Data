@@ -86,17 +86,45 @@ public class decryptCaeserCipher
         return decrypted.toString();
     }
 
+
+    public String combine(String odd,String even)
+    {
+        String res="";
+        int totLength=odd.length()+even.length();
+        int oddPos=0;
+        int evenPos=0;
+        for(int i=0;i<totLength;i++)
+        {
+            if(i%2==0)
+            {
+                res+=odd.charAt(oddPos);
+                oddPos+=1;
+            }
+            else
+            {
+                res+=even.charAt(evenPos);
+                evenPos+=1;
+            }
+        }
+        return res;
+    }
+
     public void testDecrypt() 
     {
         FileResource fr=new FileResource();
         String message=fr.asString();
-        //String oddString=halfOfString(message,0);
-        //String evenString=halfOfString(message,1);
-        //System.out.println("OddString: "+oddString);
-        //System.out.println("EvenString: "+evenString);
+        String oddString=halfOfString(message,0);
+        String evenString=halfOfString(message,1);
+        int key1=getKey(oddString);
+        int key2=getKey(evenString);
+        String oddDecrypt=decrypt(oddString,26-key1);
+        String evenDecrypt=decrypt(evenString,26-key2);
+        String twoKeyDecrypt=combine(oddDecrypt,evenDecrypt);
         int key=getKey(message);
         String decryptedMessage=decrypt(message,26-key);
         System.out.println("Decrypted Message: "+decryptedMessage);
+        System.out.println("Decrypted using TwoKeys: "+twoKeyDecrypt);
+        System.out.println("key1: "+key1+" Key2: "+key2);
     }
 
     public static void main(String[] args) {
