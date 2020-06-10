@@ -35,37 +35,6 @@ public class caeserCipher
         return encrypted.toString();
     }
 
-    public String decrypt(String message,int key)
-    {
-        StringBuilder decrypted=new StringBuilder(message);
-        String alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String shifted=alphabet.substring(key)+alphabet.substring(0,key);
-
-        for(int i=0;i<decrypted.length();i++)
-        {
-            char currentChar=decrypted.charAt(i);
-            if('a'<= currentChar && currentChar <= 'z')
-            {
-                alphabet=alphabet.toLowerCase();
-                shifted=shifted.toLowerCase();
-            }
-            if('A'<= currentChar && currentChar <= 'Z')
-            {
-                alphabet=alphabet.toUpperCase();
-                shifted=shifted.toUpperCase();
-            }
-            int idx=alphabet.indexOf(currentChar);
-
-            if(idx!=-1)
-            {
-                char newChar=shifted.charAt(idx);
-                decrypted.setCharAt(i, newChar);
-            }
-        }
-
-        return decrypted.toString();
-    }
-
     public String encryptTwoKeys(String message,int key1,int key2)
     {
         StringBuilder twoKeys=new StringBuilder(message);
@@ -125,10 +94,12 @@ public class caeserCipher
         String message=fr.asString();
         String encrypted=encrypt(message,key);
         System.out.println("Encrypted: "+encrypted);
-        String decrypted=decrypt(encrypted,26-key);
+        String decrypted=encrypt(encrypted,26-key);
         System.out.println("Decrypted: "+decrypted);
-        String twoKey=encryptTwoKeys(message,23,17);
-        System.out.println("Encrypted using two keys: "+twoKey);
+        String twoKeyEncrypt=encryptTwoKeys(message,2,20);
+        System.out.println("Encrypted using two keys: "+twoKeyEncrypt);
+        String twoKeyDecrypt=encryptTwoKeys(message,26-2,26-20);
+        System.out.println("Decrypted using two keys: "+twoKeyDecrypt);
     }
 
     public static void main(String[] args) {
