@@ -45,6 +45,19 @@ public class CharactersInPlay
         }
     }
 
+    public void characterWithNumParts(int num1,int num2) 
+    {
+        for(int k=0;k<count.size();k++)
+        {
+            if(count.get(k)>=num1 && count.get(k)<=num2)
+            {
+                System.out.println("The main character between : " + num1 + " and " + num2 
+                + " is " + character.get(k) +"\t"
+                +"The number of speaking parts is: "+ count.get(k));
+            }
+        }
+    }
+
 
     public void tester() 
     {
@@ -56,6 +69,9 @@ public class CharactersInPlay
                 System.out.println("Main character: "+character.get(k)+"\t"+"No. Of speaking part: "+count.get(k));
             }
         }
+        int n1=2;
+        int n2=3;
+        characterWithNumParts(n1,n2);
     }
 
     public static void main(String[] args) 
