@@ -1,16 +1,34 @@
 package Week2.GladLib;
+import edu.duke.*;
+import java.util.*;
 
 public class gladLib 
 {
 
     private void printOut(String story,int lineWidth)
     {
-
+        
     }
 
-    public String fromTemplate(String source)
+    private String fromTemplate(String source)
     {
         String story="";
+        if(source.startsWith("http"))
+        {
+            URLResource resource=new URLResource(source);
+            for(String word:resource.words())
+            {
+                story+=processWords(word)+" ";
+            }
+        }
+        else
+        {
+            FileResource resource=new FileResource(source);
+            for(String word:resource.words())
+            {
+                story+=processWords(word)+" ";
+            }
+        }
         return story;
     }
 
