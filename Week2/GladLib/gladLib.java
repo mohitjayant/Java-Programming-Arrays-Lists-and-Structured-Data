@@ -5,10 +5,29 @@ import java.util.*;
 public class gladLib 
 {
 
+    private String getSubstitute(String label) 
+    {
+        return "";
+    }
+
     private void printOut(String story,int lineWidth)
     {
         
     }
+
+     private String processWords(String str)
+     {
+         int first=str.indexOf("<");
+         int last=str.indexOf(">");
+         if(first==-1 || last==-1)
+         {
+             return str;
+         }
+         String prefix=str.substring(0,first);
+         String suffix=str.substring(last+1);
+         String sub=getSubstitute(str.substring(first+1,last));
+         return prefix+sub+suffix;
+     }
 
     private String fromTemplate(String source)
     {
