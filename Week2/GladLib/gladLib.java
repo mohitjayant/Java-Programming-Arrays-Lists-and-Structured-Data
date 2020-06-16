@@ -95,7 +95,7 @@ public class gladLib
         {
             return randomFrom(animalList);
         }
-        if(label.equals("timeFrame"))
+        if(label.equals("timeframe"))
         {
             return randomFrom(timeList);
         }
