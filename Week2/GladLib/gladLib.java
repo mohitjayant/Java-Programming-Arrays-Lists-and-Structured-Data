@@ -63,9 +63,47 @@ public class gladLib
 		timeList = readIt(source+"/timeframe.txt");
     }
 
+    private String randomFrom(ArrayList<String> list)
+    {
+        int index=myRandom.nextInt(list.size());
+        return list.get(index);
+    }
+
     private String getSubstitute(String label) 
     {
-        return "";
+        if(label.equals("country"))
+        {
+            return randomFrom(countryList);
+        }
+        if(label.equals("color"))
+        {
+            return randomFrom(colorList);
+        }
+        if(label.equals("noun"))
+        {
+            return randomFrom(nounList);
+        }
+        if(label.equals("name"))
+        {
+            return randomFrom(nameList);
+        }
+        if(label.equals("adjective"))
+        {
+            return randomFrom(adjectiveList);
+        }
+        if(label.equals("animal"))
+        {
+            return randomFrom(animalList);
+        }
+        if(label.equals("timeFrame"))
+        {
+            return randomFrom(timeList);
+        }
+        if(label.equals("number"))
+        {
+            return ""+myRandom.nextInt(50)+5;
+        }
+        return "**UNKNOWN**";
     }
 
     private void printOut(String story,int lineWidth)
