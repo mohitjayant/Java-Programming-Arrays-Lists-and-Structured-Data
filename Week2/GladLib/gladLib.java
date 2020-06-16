@@ -15,7 +15,7 @@ public class gladLib
     private Random myRandom;
 
     private static String dataSourceURL = "http://dukelearntoprogram.com/course3/data";
-    private static String dataSourceDirectory = "data";
+    private static String dataSourceDirectory = "Week2/GladLib/data";
     
     public gladLib()
     {
@@ -106,9 +106,17 @@ public class gladLib
         return "**UNKNOWN**";
     }
 
-    private void printOut(String story,int lineWidth)
+    private void printOut(String s,int lineWidth)
     {
-        
+        int charsWritten = 0;
+		for(String w : s.split("\\s+")){
+			if (charsWritten + w.length() > lineWidth){
+				System.out.println();
+				charsWritten = 0;
+			}
+			System.out.print(w+" ");
+			charsWritten += w.length() + 1;
+		}
     }
 
      private String processWords(String str)
@@ -150,7 +158,7 @@ public class gladLib
     public void makeStory() 
     {
         System.out.println("\n");
-        String story=fromTemplate("data/madTemplate.txt");
+        String story=fromTemplate("Week2/GladLib/data/madTemplate.txt");
         printOut(story,60);
     }
 
