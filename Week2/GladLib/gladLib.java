@@ -4,6 +4,64 @@ import java.util.*;
 
 public class gladLib 
 {
+    private ArrayList<String> adjectiveList;
+	private ArrayList<String> nounList;
+	private ArrayList<String> colorList;
+	private ArrayList<String> countryList;
+	private ArrayList<String> nameList;
+	private ArrayList<String> animalList;
+    private ArrayList<String> timeList;
+    
+    private Random myRandom;
+
+    private static String dataSourceURL = "http://dukelearntoprogram.com/course3/data";
+    private static String dataSourceDirectory = "data";
+    
+    public gladLib()
+    {
+        initializeFromSource(dataSourceDirectory);
+        myRandom=new Random();
+    }
+
+    public gladLib(String source)
+    {
+        initializeFromSource(source);
+        myRandom=new Random();
+    }
+
+    private ArrayList<String> readIt(String source)
+    {
+        ArrayList<String> list=new ArrayList<String>();
+        if(source.startsWith("http"))
+        {
+            URLResource resource=new URLResource(source);
+            for(String line:resource.lines())
+            {
+                list.add(line);
+            }
+        }
+        else
+        {
+            FileResource resource=new FileResource(source);
+            for(String line:resource.lines())
+            {
+                list.add(line);
+            }
+
+        }
+        return list;
+    }
+
+    private void initializeFromSource(String source)
+    {
+        adjectiveList= readIt(source+"/adjective.txt");	
+		nounList = readIt(source+"/noun.txt");
+		colorList = readIt(source+"/color.txt");
+		countryList = readIt(source+"/country.txt");
+		nameList = readIt(source+"/name.txt");		
+		animalList = readIt(source+"/animal.txt");
+		timeList = readIt(source+"/timeframe.txt");
+    }
 
     private String getSubstitute(String label) 
     {
